@@ -301,6 +301,7 @@ export default class KlineChart {
     }
 
     limitArea() {
+        console.log('limitArea: ');
         const { start, end } = this.view
         const start_id = Math.floor(start * this.kLen / 100)
         const end_id = Math.floor(end * this.kLen / 100)
@@ -479,6 +480,9 @@ export default class KlineChart {
 
         // 绘制
         this.draw()
+        /* requestAnimationFrame 来动态更新，每次帧渲染完后，都会 clearRect 清理画布。然后因为我们的图表是有动态范围的，所以我们在 limitArea 中处理 option 传递的 data 数据做分割，方便后期的滚动事件做缩放数据范围的处理。
+        与 setTimeout 相比，requestAnimationFrame 最大的优势是 由系统来决定回调函数的执行时机。
+        如果系统绘制率是 60Hz，那么回调函数就每16.7ms 被执行一次，如果绘制频率是75Hz，那么这个间隔时间就变成了 1000/75=13.3ms，也就是说它的时间间隔，是跟着系统的绘制频率走。 */
         requestAnimationFrame(this.requestAnimation.bind(_self))
     }
 
