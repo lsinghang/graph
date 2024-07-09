@@ -1,4 +1,4 @@
-import { findClosestId, drawLine, removeOddIndexItems, drawText, drawCurve, drawPolyline } from "./utils"
+import { findClosestId, drawLine, removeOddIndexItems, drawText, drawCurve, drawPolyline } from "./utils.js"
 export default class KlineChart {
     /** 时间集合 */
     times = []
@@ -470,6 +470,7 @@ export default class KlineChart {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         // 限制option数据
         this.limitArea()
+
 
         // 计算视口数据
         this.calcView()
