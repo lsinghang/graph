@@ -58,11 +58,20 @@
 
         // SAT 碰撞检测
         function checkCollision() {
-            // 检查四边形和六边形是否相交的逻辑
+            // 获取四边形和六边形的边
+            const quadEdges = getEdges(quadPoints);
+            const hexEdges = getEdges(hexPoints);
 
-            // TODO: 实现 SAT 碰撞检测算法
+            // 获取四边形和六边形的法向量
+            const quadNormals = getNormals(quadEdges);
+            const hexNormals = getNormals(hexEdges);
 
-            return false; // 假设没有碰撞
+            // 检查四边形和六边形的所有边是否分离
+            if (isSeparating(quadPoints, hexPoints, quadNormals.concat(hexNormals))) {
+                return false; // 分离，没有碰撞
+            }
+            // 没有找到分离轴，发生碰撞
+            return true;
         }
 
         // 更新画面
